@@ -18,3 +18,13 @@ app.get('/', (req, res) =>{
 app.listen(3000, () => {
   console.log('Server listening on port 3000');
 });
+
+mongoose.connection.once('open', () => {
+  console.log('Connected to MongoDB')
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+})
+
+mongoose.connection.on('error', err => {
+  console.log(err)
+  logEvents(`${err.no}: ${err.code}\t${err.syscall}\t${err.hostname}`, 'mongoErrLog.log')
+})
