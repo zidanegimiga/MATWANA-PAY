@@ -26,6 +26,10 @@ app.use('/passenger/register', require('./routes/passengers/registerPassenger'))
 app.use('/passenger/login', require('./routes/passengers/loginPassenger'))
 app.use('/merchants/register', require('./routes/merchants/registerMerchants'))
 
+app.get('/payment/:merchantId', (req, res)=>{
+  console.log("Merchant ID: ", req.params.merchantId)
+})
+
 app.listen(3000, () => {
   console.log('Server listening on port 3000');
 });
