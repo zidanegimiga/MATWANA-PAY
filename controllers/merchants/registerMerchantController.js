@@ -36,7 +36,7 @@ const createMerchant = asyncHandler(async (req, res, next) => {
     if (merchant) {
         const merchantId = merchant._id;
         console.log(merchantId.toString())
-        const qrCodeDataUrl = await qrcode.toDataURL(merchantId.toString());
+        const qrCodeDataUrl = await qrcode.toDataURL(`https://lazy-pear-cheetah-ring.cyclic.app/${merchantId.toString()}`);
         console.log(typeof qrCodeDataUrl);
 
         const qrCodeFilename = `${merchant._id.toString()}.png`;
