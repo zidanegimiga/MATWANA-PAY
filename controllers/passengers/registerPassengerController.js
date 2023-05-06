@@ -1,7 +1,5 @@
 const Passenger = require('../../models/passenger');
-const Token = require('../../models/token');
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
 const asyncHandler = require('express-async-handler')
 
 // @desc PassengerAccountCreation
@@ -9,9 +7,9 @@ const asyncHandler = require('express-async-handler')
 // @access Public
 
 const createPassenger = asyncHandler(async (req, res) => {
-    const { pin, email, username } = req.body;
+    const { pin, email, username, phoneNumber } = req.body;
 
-    if (!email || !pin || !username) {
+    if (!email || !pin || !username || !phoneNumber) {
         return res.status(400).json({ message: 'All fields are required' })
     }
 
@@ -29,7 +27,7 @@ const createPassenger = asyncHandler(async (req, res) => {
     const salt = await bcrypt.genSalt(Number(process.env.SALT));
     const hashedPin = await bcrypt.hash(pin, salt)
 
-    const userObject = { username, "pin": hashedPin, email }
+    const userObject = { username, "pin": hashedPin, email, phoneNumber }
 
     const passenger = await Passenger.create(userObject)
 
