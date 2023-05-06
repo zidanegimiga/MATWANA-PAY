@@ -1,15 +1,20 @@
-require('dotenv').config({ path: __dirname + '/.env' })
+require('dotenv').config()
 
 const express = require('express');
 const cors = require('cors')
 const corsOptions = require('./config/corsOptions')
-app.use(cors(corsOptions))
 const connectDB = require('./config/dbConnect')
+const MongoStore = require("connect-mongo")
+const mongoose = require('mongoose')
+
+const PORT = process.env.PORT || 3500;
 
 // connect to database
 connectDB();
 
 const app = express();
+
+app.use(cors(corsOptions))
 
 app.get('/', (req, res) =>{
   res.send('Project initiated')
