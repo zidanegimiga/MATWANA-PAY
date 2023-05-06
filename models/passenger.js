@@ -10,6 +10,11 @@ const passengerSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
+  phoneNumber: {
+    type: String,
+    required: true,
+    unique: true
+  },
   pin: {
     type: String,
     required: true
