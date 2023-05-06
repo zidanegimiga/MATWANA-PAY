@@ -23,6 +23,7 @@ app.get('/', (req, res) =>{
 })
 
 app.use('/passenger/register', require('./routes/passengers/registerPassenger'))
+app.use('/passenger/login', require('./routes/passengers/loginPassenger'))
 app.use('/merchants/register', require('./routes/merchants/registerMerchants'))
 
 app.listen(3000, () => {
