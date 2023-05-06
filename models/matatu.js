@@ -18,7 +18,6 @@ const merchantSchema = new mongoose.Schema({
   qrCodePath: {
     type: String,
     required: false,
-    unique: true
   },
   password: {
     type: String,

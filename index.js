@@ -6,6 +6,7 @@ const corsOptions = require('./config/corsOptions')
 const connectDB = require('./config/dbConnect')
 const MongoStore = require("connect-mongo")
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser');
 
 const PORT = process.env.PORT || 3500;
 
@@ -15,13 +16,14 @@ connectDB();
 const app = express();
 
 app.use(cors(corsOptions))
+app.use(bodyParser.json());
 
 app.get('/', (req, res) =>{
   res.send('Project initiated')
 })
 
 app.use('/passenger/register', require('./routes/passengers/registerPassenger'))
-app.use('/merchants', require('./routes/merchants/registerMerchants'))
+app.use('/merchants/register', require('./routes/merchants/registerMerchants'))
 
 app.listen(3000, () => {
   console.log('Server listening on port 3000');

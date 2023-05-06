@@ -11,7 +11,7 @@ const qrcode = require('qrcode');
 const createMerchant = asyncHandler(async (req, res, next) => {
     const { email, plateNumber, username, phoneNumber, password } = req.body;
 
-    if (!email || !pin || !username || !phoneNumber || !password) {
+    if (!email || !plateNumber || !username || !phoneNumber || !password) {
         return res.status(400).json({ message: 'All fields are required' })
     }
 
@@ -31,11 +31,13 @@ const createMerchant = asyncHandler(async (req, res, next) => {
 
     const merchantObject = { username, "password": hashedPassword, email, phoneNumber, plateNumber }
 
-    const merchant = await Passenger.create(merchantObject)
+    const merchant = await Merchant.create(merchantObject)
 
     if (merchant) {
         const merchantId = merchant._id;
-        const qrCodeDataUrl = await qrcode.toDataURL(merchantId);
+        console.log(merchantId.toString())
+        const qrCodeDataUrl = await qrcode.toDataURL(merchantId.toString());
+        console.log(typeof qrCodeDataUrl);
 
         const qrCodeFilename = `${merchant._id.toString()}.png`;
         const qrCodePath = `/qrcodeImages/${qrCodeFilename}`;
@@ -45,11 +47,7 @@ const createMerchant = asyncHandler(async (req, res, next) => {
         const qrCodeBuffer = Buffer.from(qrCodeDataUrl.split(',')[1], 'base64');
         const qrCodeFilepath = __dirname + qrCodePath;
         fs.writeFileSync(qrCodeFilepath, qrCodeBuffer);
-
-        res.status(200).json({
-            "success": `${merchant.username} created successfully`
-        })
-        res.sendFile(qrCodeFilepath);
+        res.status(200).sendFile(qrCodeFilepath);
     }
 })
 
