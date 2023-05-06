@@ -20,6 +20,8 @@ app.get('/', (req, res) =>{
   res.send('Project initiated')
 })
 
+app.use('/passenger/register', require('./routes/passengers/registerPassenger'))
+
 app.listen(3000, () => {
   console.log('Server listening on port 3000');
 });
