@@ -1,4 +1,7 @@
 const express = require('express');
+const cors = require('cors')
+const corsOptions = require('./config/corsOptions')
+app.use(cors(corsOptions))
 
 const app = express();
 
