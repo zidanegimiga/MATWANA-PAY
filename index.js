@@ -23,11 +23,12 @@ app.get('/', (req, res) =>{
 })
 
 app.use('/passenger/register', require('./routes/passengers/registerPassenger'))
-app.use('/passenger/login', require('./routes/passengers/loginPassenger'))
+// app.use('/passenger/login', require('./routes/passengers/loginPassenger'))
 app.use('/merchants/register', require('./routes/merchants/registerMerchants'))
 
 app.get('/payment/:merchantId', (req, res)=>{
   console.log("Merchant ID: ", req.params.merchantId)
+  res.send('Success')
 })
 
 app.listen(3000, () => {
