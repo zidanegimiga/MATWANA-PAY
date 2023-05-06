@@ -21,6 +21,7 @@ app.get('/', (req, res) =>{
 })
 
 app.use('/passenger/register', require('./routes/passengers/registerPassenger'))
+app.use('/merchants', require('./routes/merchants/registerMerchants'))
 
 app.listen(3000, () => {
   console.log('Server listening on port 3000');

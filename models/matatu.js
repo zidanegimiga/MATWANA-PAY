@@ -15,13 +15,14 @@ const merchantSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
+  qrCodePath: {
+    type: String,
+    required: false,
+    unique: true
+  },
   password: {
     type: String,
     required: true
-  },
-  verified: {
-    type: Boolean,
-    default: false
   }
 });
 
